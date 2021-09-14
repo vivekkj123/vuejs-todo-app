@@ -1,26 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="header">
+    <h1>Todo Application</h1>
+  </div>
+  <form action="" @submit.prevent="addTodo" >
+    <input type="text" v-model="todoText">
+    <input type="button" value="Add">
+  </form>
+  <div class="todo__thread">
+    <div class="todo" v-for="todo in todos" :key="todo.id">
+      <h3>{{ todo.todo }}</h3>
+      <button
+      @click="removeTodo(todo.id)"
+      >Remove Item</button>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      todoText: '',
+      todos:[{id:1, todo:'First Todo'}]
+    }
+},
+methods:{
+  addTodo(){
+    this.todos.push({id:Math.random(), todo: this.todoText})
+    this.todoText = ''
+  },
+  removeTodo(id){
+    this.todos = this.todos.filter((item) => item.id !== id);
   }
 }
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.todo{
+  display: flex;
+  background-color: blanchedalmond;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 25px;
+  justify-content: space-between;
 }
 </style>
