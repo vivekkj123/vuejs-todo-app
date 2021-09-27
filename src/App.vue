@@ -9,18 +9,12 @@
   </form>
   <div class="todo__thread">
     <div class="todo" v-for="todo in todos" :key="todo.id">
-      <input @click="markAsCompleted(todo)" type="checkbox" name="" id="" />
-      <h3
-        v-bind:style="[
-          todo.completed
-            ? {
-                textDecoration: line-through,
-              }
-            : {  },
-        ]"
+      <input type="checkbox" class="" name="" id="" />
+      <label
+        class="todo"
       >
         {{ todo.todo }}
-      </h3>
+      </label>
       <button @click="removeTodo(todo.id)" class="removebtn">🗑</button>
     </div>
   </div>
@@ -32,7 +26,8 @@ export default {
   data() {
     return {
       todoText: "",
-      todos: [{ id: 1, todo: "First Todo" }],
+      todos: [{ id: 1, todo: "First Todo"}],
+      textDecoration: 'lineThrough',
     };
   },
   methods: {
@@ -40,23 +35,15 @@ export default {
       this.todos.push({
         id: Math.random(),
         todo: this.todoText,
-        completed: false,
       });
       this.todoText = "";
     },
     removeTodo(id) {
       this.todos = this.todos.filter((item) => item.id !== id);
     },
-    markAsCompleted(todo) {
-      let selectedTodo = this.todos.filter((item) => item.id === todo.id);
-      if (selectedTodo.completed) {
-        selectedTodo.completed = false;
-      } else {
-        selectedTodo.completed = true;
-      }
-    },
   },
 };
+
 </script>
 
 <style>
@@ -112,6 +99,7 @@ form {
   font-size: 30px;
   cursor: pointer;
 }
-.strike {
+input[type=checkbox]:checked + label.todo{
+  text-decoration: line-through;
 }
 </style>
