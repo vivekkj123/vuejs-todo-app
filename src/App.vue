@@ -11,7 +11,7 @@
     <div class="todo" v-for="todo in todos" :key="todo.id">
       <input type="checkbox" class="" name="" id="" />
       <label
-        class="todo"
+        class="todoItem"
       >
         {{ todo.todo }}
       </label>
@@ -62,6 +62,13 @@ html {
   flex-direction: column;
   align-items: center;
 }
+.todo__thread{
+  display: flex;
+  flex-direction: column;;
+  justify-content: center;
+  align-items: center;
+}
+
 .todo {
   display: flex;
   background-color: #ffff;
@@ -69,8 +76,18 @@ html {
   padding: 15px;
   margin: 10px;
   border-radius: 15px;
-  width: 450px;
+  width: 35vw;
   justify-content: space-between;
+}
+@media only screen and (max-width: 480px){
+  .todo{
+  width: 70vw;
+
+  }
+}
+.todo > label {
+  overflow-wrap: break-word;
+  max-width: 80%;
 }
 form {
   text-align: center;
@@ -78,7 +95,7 @@ form {
 }
 .inputBox {
   height: 40px;
-  width: 380px;
+  width: 85%;
   border-radius: 15px;
 }
 .notepadIcon {
@@ -99,7 +116,7 @@ form {
   font-size: 30px;
   cursor: pointer;
 }
-input[type=checkbox]:checked + label.todo{
+input[type=checkbox]:checked + label.todoItem{
   text-decoration: line-through;
 }
 </style>
